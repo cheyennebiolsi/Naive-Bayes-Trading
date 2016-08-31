@@ -132,7 +132,6 @@ def prepareDataset(f, columns, prior, trainingDays, tradingDays, start_date):
     dataset = loadCsv(f)
     close = findColumn(dataset, 'close')
     start_index = findStartIndex(dataset, start_date)
-    print(tradingDays)
     X = []
     Y = []
     for i in range(start_index - trainingDays, start_index + tradingDays + 1):
@@ -197,6 +196,8 @@ def simulateDays(tradingDays, assets, tradingData, tradingClasses, plot):
         if plot == 1:
             figs.append(plotRisksReturns(tanWeights, expectations, volatilities, date))
         
+        # If the expected return of the tangency portfolio is below the risk-free,
+        # short all assets
         if mu < 0:
             tanWeights = -1*np.array(tanWeights)
         
@@ -336,7 +337,7 @@ def plotRisksReturns(tanWeights, expectations, volatilities, t):
     formatter = FuncFormatter(to_percent)
     
     # Draw plot
-    fig, ax1 = plt.subplots(1)
+    fig, ax1 = plt.subplots(1, figsize=(16,9))
     ax1.set_xlabel("Standard Deviation")
     ax1.set_ylabel("Expected Return")
     title = datetime.strftime(t, "Efficient frontier for %b %d, %Y")
