@@ -1,0 +1,12 @@
+{
+  "dataDirectory": "data/",
+  "startDate": "20000101",
+  "numberOfDaysToSimulate": 10,
+  "numberOfTrainingWindowDays": 5,
+  "numberOfPredictorDays": 1,
+  "additionalArgs": [
+  ],
+  "riskFreeReturn": 0,
+  "plotResults": "True",
+  "resultsDirectory": "results/"
+}
